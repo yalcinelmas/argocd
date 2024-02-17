@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: titconn-keyvault-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-keyvault:2024.2.17.22
+        image: harbor.teknobulut.net/titconnsisecam/titconn-keyvault:2024.2.17.24
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -81,7 +81,7 @@ spec:
     spec:
       containers:
       - name: titconn-hub-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-hub:2024.2.17.22
+        image: harbor.teknobulut.net/titconnsisecam/titconn-hub:2024.2.17.24
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -148,7 +148,7 @@ spec:
     spec:
       containers:
       - name: titconn-api-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-api:2024.2.17.22
+        image: harbor.teknobulut.net/titconnsisecam/titconn-api:2024.2.17.24
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -198,3 +198,71 @@ spec:
                 name: titconn-api-service
                 port:
                   number: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: titconn-microservice-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: titconn-microservice
+  template:
+    metadata:
+      labels:
+        app: titconn-microservice
+    spec:
+      containers:
+      - name: titconn-microservice-container
+        image: harbor.teknobulut.net/titconnsisecam/titconn-microservice:2024.2.17.24
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        env:
+            - name: ASPNETCORE_URLS
+              value: http://+:80
+      imagePullSecrets:
+      - name: harbor-registry-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: titconn-microservice-service
+  labels:
+   app: titconn-microservice-service
+spec:
+  selector:
+    app: titconn-microservice
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+  type: ClusterIP
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: titconn-microservice-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - titconn-sisecam-microservice.teknobulut.net
+      secretName: titconn-microservice-ingress
+  rules:
+    - host: titconn-sisecam-microservice.teknobulut.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: titconn-microservice-service
+                port:
+                  number: 80
+
