@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: titconn-keyvault-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-keyvault:2024.2.17.27
+        image: harbor.teknobulut.net/titconnsisecam/titconn-keyvault:2024.2.17.28
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -81,7 +81,7 @@ spec:
     spec:
       containers:
       - name: titconn-hub-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-hub:2024.2.17.27
+        image: harbor.teknobulut.net/titconnsisecam/titconn-hub:2024.2.17.28
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -137,7 +137,7 @@ kind: Deployment
 metadata:
   name: titconn-api-deployment
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: titconn-api
@@ -148,7 +148,7 @@ spec:
     spec:
       containers:
       - name: titconn-api-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-api:2024.2.17.27
+        image: harbor.teknobulut.net/titconnsisecam/titconn-api:2024.2.17.28
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -215,7 +215,7 @@ spec:
     spec:
       containers:
       - name: titconn-microservice-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-microservice:2024.2.17.27
+        image: harbor.teknobulut.net/titconnsisecam/titconn-microservice:2024.2.17.28
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -282,7 +282,7 @@ spec:
     spec:
       containers:
       - name: titconn-scheduler-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-scheduler:2024.2.17.27
+        image: harbor.teknobulut.net/titconnsisecam/titconn-scheduler:2024.2.17.28
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -338,7 +338,7 @@ kind: Deployment
 metadata:
   name: titconn-app-deployment
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: titconn-app
@@ -349,7 +349,7 @@ spec:
     spec:
       containers:
       - name: titconn-app-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-app:2024.2.17.27
+        image: harbor.teknobulut.net/titconnsisecam/titconn-app:2024.2.17.28
         imagePullPolicy: Always
         ports:
         - containerPort: 80
