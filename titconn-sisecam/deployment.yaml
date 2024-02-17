@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: titconn-keyvault-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-keyvault:2024.2.17.21
+        image: harbor.teknobulut.net/titconnsisecam/titconn-keyvault:2024.2.17.22
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -81,7 +81,7 @@ spec:
     spec:
       containers:
       - name: titconn-hub-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-hub:2024.2.17.21
+        image: harbor.teknobulut.net/titconnsisecam/titconn-hub:2024.2.17.22
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -148,7 +148,7 @@ spec:
     spec:
       containers:
       - name: titconn-api-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-api:2024.2.17.21
+        image: harbor.teknobulut.net/titconnsisecam/titconn-api:2024.2.17.22
         imagePullPolicy: Always
         ports:
         - containerPort: 80
