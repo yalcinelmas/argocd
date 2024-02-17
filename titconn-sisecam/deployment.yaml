@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: titconn-keyvault-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-keyvault:2024.2.17.26
+        image: harbor.teknobulut.net/titconnsisecam/titconn-keyvault:2024.2.17.27
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -81,7 +81,7 @@ spec:
     spec:
       containers:
       - name: titconn-hub-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-hub:2024.2.17.26
+        image: harbor.teknobulut.net/titconnsisecam/titconn-hub:2024.2.17.27
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -148,7 +148,7 @@ spec:
     spec:
       containers:
       - name: titconn-api-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-api:2024.2.17.26
+        image: harbor.teknobulut.net/titconnsisecam/titconn-api:2024.2.17.27
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -215,7 +215,7 @@ spec:
     spec:
       containers:
       - name: titconn-microservice-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-microservice:2024.2.17.26
+        image: harbor.teknobulut.net/titconnsisecam/titconn-microservice:2024.2.17.27
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -282,7 +282,7 @@ spec:
     spec:
       containers:
       - name: titconn-scheduler-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-scheduler:2024.2.17.26
+        image: harbor.teknobulut.net/titconnsisecam/titconn-scheduler:2024.2.17.27
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -330,6 +330,73 @@ spec:
             backend:
               service:
                 name: titconn-scheduler-service
+                port:
+                  number: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: titconn-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: titconn-app
+  template:
+    metadata:
+      labels:
+        app: titconn-app
+    spec:
+      containers:
+      - name: titconn-app-container
+        image: harbor.teknobulut.net/titconnsisecam/titconn-app:2024.2.17.27
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        env:
+            - name: ASPNETCORE_URLS
+              value: http://+:80
+      imagePullSecrets:
+      - name: harbor-registry-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: titconn-app-service
+  labels:
+   app: titconn-app-service
+spec:
+  selector:
+    app: titconn-app
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+  type: ClusterIP
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: titconn-app-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - titconn-sisecam-app.teknobulut.net
+      secretName: titconn-app-ingress
+  rules:
+    - host: titconn-sisecam-app.teknobulut.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: titconn-app-service
                 port:
                   number: 80
 
