@@ -64,4 +64,71 @@ spec:
                 name: titconn-keyvault-service
                 port:
                   number: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: titconn-hub-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: titconn-hub
+  template:
+    metadata:
+      labels:
+        app: titconn-hub
+    spec:
+      containers:
+      - name: titconn-hub-container
+        image: harbor.teknobulut.net/titconnsisecam/titconn-hub:{version}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        env:
+            - name: ASPNETCORE_URLS
+              value: http://+:80
+      imagePullSecrets:
+      - name: harbor-registry-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: titconn-hub-service
+  labels:
+   app: titconn-hub-service
+spec:
+  selector:
+    app: titconn-hub
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+  type: ClusterIP
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: titconn-hub-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - titconn-sisecam-hub.teknobulut.net
+      secretName: titconn-hub-ingress
+  rules:
+    - host: titconn-sisecam-hub.teknobulut.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: titconn-hub-service
+                port:
+                  number: 80
 
