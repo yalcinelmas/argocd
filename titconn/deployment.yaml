@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: titconn-keyvault-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-keyvault:2024.2.20.1
+        image: harbor.teknobulut.net/titconn/titconn-keyvault:2024.2.20.4
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -51,10 +51,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - titconn-sisecam-keyvault.teknobulut.net
+        - titconn-keyvault.teknobulut.net
       secretName: titconn-keyvault-ingress
   rules:
-    - host: titconn-sisecam-keyvault.teknobulut.net
+    - host: titconn-keyvault.teknobulut.net
       http:
         paths:
           - path: /
@@ -81,7 +81,7 @@ spec:
     spec:
       containers:
       - name: titconn-hub-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-hub:2024.2.20.1
+        image: harbor.teknobulut.net/titconn/titconn-hub:2024.2.20.4
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -118,10 +118,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - titconn-sisecam-hub.teknobulut.net
+        - titconn-hub.teknobulut.net
       secretName: titconn-hub-ingress
   rules:
-    - host: titconn-sisecam-hub.teknobulut.net
+    - host: titconn-hub.teknobulut.net
       http:
         paths:
           - path: /
@@ -148,7 +148,7 @@ spec:
     spec:
       containers:
       - name: titconn-api-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-api:2024.2.20.1
+        image: harbor.teknobulut.net/titconn/titconn-api:2024.2.20.4
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -185,10 +185,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - titconn-sisecam-api.teknobulut.net
+        - titconn-api.teknobulut.net
       secretName: titconn-api-ingress
   rules:
-    - host: titconn-sisecam-api.teknobulut.net
+    - host: titconn-api.teknobulut.net
       http:
         paths:
           - path: /
@@ -215,7 +215,7 @@ spec:
     spec:
       containers:
       - name: titconn-microservice-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-microservice:2024.2.20.1
+        image: harbor.teknobulut.net/titconn/titconn-microservice:2024.2.20.4
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -252,10 +252,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - titconn-sisecam-microservice.teknobulut.net
+        - titconn-microservice.teknobulut.net
       secretName: titconn-microservice-ingress
   rules:
-    - host: titconn-sisecam-microservice.teknobulut.net
+    - host: titconn-microservice.teknobulut.net
       http:
         paths:
           - path: /
@@ -282,7 +282,7 @@ spec:
     spec:
       containers:
       - name: titconn-scheduler-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-scheduler:2024.2.20.1
+        image: harbor.teknobulut.net/titconn/titconn-scheduler:2024.2.20.4
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -319,10 +319,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - titconn-sisecam-scheduler.teknobulut.net
+        - titconn-scheduler.teknobulut.net
       secretName: titconn-scheduler-ingress
   rules:
-    - host: titconn-sisecam-scheduler.teknobulut.net
+    - host: titconn-scheduler.teknobulut.net
       http:
         paths:
           - path: /
@@ -349,7 +349,7 @@ spec:
     spec:
       containers:
       - name: titconn-app-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-app:2024.2.20.1
+        image: harbor.teknobulut.net/titconn/titconn-app:2024.2.20.4
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -386,10 +386,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - titconn-sisecam-app.teknobulut.net
+        - titconn-app.teknobulut.net
       secretName: titconn-app-ingress
   rules:
-    - host: titconn-sisecam-app.teknobulut.net
+    - host: titconn-app.teknobulut.net
       http:
         paths:
           - path: /
