@@ -257,7 +257,7 @@ spec:
   rules:
     - host: titconn-microservice.teknobulut.net
       http:
-        paths:
+        paths:/Users/yalcin.elmas/Desktop/Working/Code/argocd/titconn/deployment.ori
           - path: /
             pathType: Prefix
             backend:
