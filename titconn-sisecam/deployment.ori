@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: titconn-keyvault-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-keyvault:{version}
+        image: images.teknobulut.net/titconnsisecam/titconn-keyvault:{version}
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -22,8 +22,6 @@ spec:
         env:
             - name: ASPNETCORE_URLS
               value: http://+:80
-      imagePullSecrets:
-      - name: harbor-registry-secret
 ---
 apiVersion: v1
 kind: Service
@@ -81,7 +79,7 @@ spec:
     spec:
       containers:
       - name: titconn-hub-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-hub:{version}
+        image: images.teknobulut.net/titconnsisecam/titconn-hub:{version}
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -89,8 +87,6 @@ spec:
         env:
             - name: ASPNETCORE_URLS
               value: http://+:80
-      imagePullSecrets:
-      - name: harbor-registry-secret
 ---
 apiVersion: v1
 kind: Service
@@ -148,7 +144,7 @@ spec:
     spec:
       containers:
       - name: titconn-api-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-api:{version}
+        image: images.teknobulut.net/titconnsisecam/titconn-api:{version}
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -156,8 +152,6 @@ spec:
         env:
             - name: ASPNETCORE_URLS
               value: http://+:80
-      imagePullSecrets:
-      - name: harbor-registry-secret
 ---
 apiVersion: v1
 kind: Service
@@ -215,7 +209,7 @@ spec:
     spec:
       containers:
       - name: titconn-microservice-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-microservice:{version}
+        image: images.teknobulut.net/titconnsisecam/titconn-microservice:{version}
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -223,8 +217,6 @@ spec:
         env:
             - name: ASPNETCORE_URLS
               value: http://+:80
-      imagePullSecrets:
-      - name: harbor-registry-secret
 ---
 apiVersion: v1
 kind: Service
@@ -282,7 +274,7 @@ spec:
     spec:
       containers:
       - name: titconn-scheduler-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-scheduler:{version}
+        image: images.teknobulut.net/titconnsisecam/titconn-scheduler:{version}
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -290,8 +282,6 @@ spec:
         env:
             - name: ASPNETCORE_URLS
               value: http://+:80
-      imagePullSecrets:
-      - name: harbor-registry-secret
 ---
 apiVersion: v1
 kind: Service
@@ -349,7 +339,7 @@ spec:
     spec:
       containers:
       - name: titconn-app-container
-        image: harbor.teknobulut.net/titconnsisecam/titconn-app:{version}
+        image: images.teknobulut.net/titconnsisecam/titconn-app:{version}
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -357,8 +347,6 @@ spec:
         env:
             - name: ASPNETCORE_URLS
               value: http://+:80
-      imagePullSecrets:
-      - name: harbor-registry-secret
 ---
 apiVersion: v1
 kind: Service
