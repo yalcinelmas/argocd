@@ -14,16 +14,12 @@ spec:
     spec:
       containers:
       - name: titconn-keyvault-container
-        image: harbor.teknobulut.net/titconn/titconn-keyvault:2024.5.7.1
+        image: images.teknobulut.net/titconn/titconn-keyvault:2024.5.8.1
         imagePullPolicy: Always
-        ports:
-        - containerPort: 80
-          protocol: TCP
         env:
             - name: ASPNETCORE_URLS
-              value: http://+:80
       imagePullSecrets:
-      - name: harbor-registry-secret
+      - name: harborsecret
 ---
 apiVersion: v1
 kind: Service
@@ -35,9 +31,9 @@ spec:
   selector:
     app: titconn-keyvault
   ports:
-    - port: 80
+    - port: 8080
       protocol: TCP
-      targetPort: 80
+      targetPort: 8080
   type: ClusterIP
 ---
 kind: Ingress
@@ -45,14 +41,10 @@ apiVersion: networking.k8s.io/v1
 metadata:
   name: titconn-keyvault-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   ingressClassName: nginx
-  tls:
-    - hosts:
-        - titconn-keyvault.teknobulut.net
-      secretName: titconn-keyvault-ingress
   rules:
     - host: titconn-keyvault.teknobulut.net
       http:
@@ -60,10 +52,10 @@ spec:
           - path: /
             pathType: Prefix
             backend:
-              service:
-                name: titconn-keyvault-service
-                port:
-                  number: 80
+               service:
+                 name: titconn-keyvault-service
+                 port: 
+                   number: 8080
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -81,16 +73,12 @@ spec:
     spec:
       containers:
       - name: titconn-hub-container
-        image: harbor.teknobulut.net/titconn/titconn-hub:2024.5.7.1
+        image: images.teknobulut.net/titconn/titconn-hub:2024.5.8.1
         imagePullPolicy: Always
-        ports:
-        - containerPort: 80
-          protocol: TCP
         env:
             - name: ASPNETCORE_URLS
-              value: http://+:80
       imagePullSecrets:
-      - name: harbor-registry-secret
+      - name: harborsecret
 ---
 apiVersion: v1
 kind: Service
@@ -102,9 +90,9 @@ spec:
   selector:
     app: titconn-hub
   ports:
-    - port: 80
+    - port: 8080
       protocol: TCP
-      targetPort: 80
+      targetPort: 8080
   type: ClusterIP
 ---
 kind: Ingress
@@ -112,14 +100,10 @@ apiVersion: networking.k8s.io/v1
 metadata:
   name: titconn-hub-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   ingressClassName: nginx
-  tls:
-    - hosts:
-        - titconn-hub.teknobulut.net
-      secretName: titconn-hub-ingress
   rules:
     - host: titconn-hub.teknobulut.net
       http:
@@ -127,17 +111,17 @@ spec:
           - path: /
             pathType: Prefix
             backend:
-              service:
-                name: titconn-hub-service
-                port:
-                  number: 80
+               service:
+                 name: titconn-hub-service
+                 port: 
+                   number: 8080
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: titconn-api-deployment
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: titconn-api
@@ -148,16 +132,12 @@ spec:
     spec:
       containers:
       - name: titconn-api-container
-        image: harbor.teknobulut.net/titconn/titconn-api:2024.5.7.1
+        image: images.teknobulut.net/titconn/titconn-api:2024.5.8.1
         imagePullPolicy: Always
-        ports:
-        - containerPort: 80
-          protocol: TCP
         env:
             - name: ASPNETCORE_URLS
-              value: http://+:80
       imagePullSecrets:
-      - name: harbor-registry-secret
+      - name: harborsecret
 ---
 apiVersion: v1
 kind: Service
@@ -169,9 +149,9 @@ spec:
   selector:
     app: titconn-api
   ports:
-    - port: 80
+    - port: 8080
       protocol: TCP
-      targetPort: 80
+      targetPort: 8080
   type: ClusterIP
 ---
 kind: Ingress
@@ -179,14 +159,10 @@ apiVersion: networking.k8s.io/v1
 metadata:
   name: titconn-api-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   ingressClassName: nginx
-  tls:
-    - hosts:
-        - titconn-api.teknobulut.net
-      secretName: titconn-api-ingress
   rules:
     - host: titconn-api.teknobulut.net
       http:
@@ -194,10 +170,10 @@ spec:
           - path: /
             pathType: Prefix
             backend:
-              service:
-                name: titconn-api-service
-                port:
-                  number: 80
+               service:
+                 name: titconn-api-service
+                 port: 
+                   number: 8080
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -215,16 +191,12 @@ spec:
     spec:
       containers:
       - name: titconn-microservice-container
-        image: harbor.teknobulut.net/titconn/titconn-microservice:2024.5.7.1
+        image: images.teknobulut.net/titconn/titconn-microservice:2024.5.8.1
         imagePullPolicy: Always
-        ports:
-        - containerPort: 80
-          protocol: TCP
         env:
             - name: ASPNETCORE_URLS
-              value: http://+:80
       imagePullSecrets:
-      - name: harbor-registry-secret
+      - name: harborsecret
 ---
 apiVersion: v1
 kind: Service
@@ -236,9 +208,9 @@ spec:
   selector:
     app: titconn-microservice
   ports:
-    - port: 80
+    - port: 8080
       protocol: TCP
-      targetPort: 80
+      targetPort: 8080
   type: ClusterIP
 ---
 kind: Ingress
@@ -246,14 +218,10 @@ apiVersion: networking.k8s.io/v1
 metadata:
   name: titconn-microservice-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   ingressClassName: nginx
-  tls:
-    - hosts:
-        - titconn-microservice.teknobulut.net
-      secretName: titconn-microservice-ingress
   rules:
     - host: titconn-microservice.teknobulut.net
       http:
@@ -261,10 +229,10 @@ spec:
           - path: /
             pathType: Prefix
             backend:
-              service:
-                name: titconn-microservice-service
-                port:
-                  number: 80
+               service:
+                 name: titconn-microservice-service
+                 port: 
+                   number: 8080
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -282,16 +250,12 @@ spec:
     spec:
       containers:
       - name: titconn-scheduler-container
-        image: harbor.teknobulut.net/titconn/titconn-scheduler:2024.5.7.1
+        image: images.teknobulut.net/titconn/titconn-scheduler:2024.5.8.1
         imagePullPolicy: Always
-        ports:
-        - containerPort: 80
-          protocol: TCP
         env:
             - name: ASPNETCORE_URLS
-              value: http://+:80
       imagePullSecrets:
-      - name: harbor-registry-secret
+      - name: harborsecret
 ---
 apiVersion: v1
 kind: Service
@@ -303,9 +267,9 @@ spec:
   selector:
     app: titconn-scheduler
   ports:
-    - port: 80
+    - port: 8080
       protocol: TCP
-      targetPort: 80
+      targetPort: 8080
   type: ClusterIP
 ---
 kind: Ingress
@@ -313,14 +277,10 @@ apiVersion: networking.k8s.io/v1
 metadata:
   name: titconn-scheduler-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   ingressClassName: nginx
-  tls:
-    - hosts:
-        - titconn-scheduler.teknobulut.net
-      secretName: titconn-scheduler-ingress
   rules:
     - host: titconn-scheduler.teknobulut.net
       http:
@@ -328,17 +288,17 @@ spec:
           - path: /
             pathType: Prefix
             backend:
-              service:
-                name: titconn-scheduler-service
-                port:
-                  number: 80
+               service:
+                 name: titconn-scheduler-service
+                 port: 
+                   number: 8080
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: titconn-app-deployment
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: titconn-app
@@ -349,16 +309,12 @@ spec:
     spec:
       containers:
       - name: titconn-app-container
-        image: harbor.teknobulut.net/titconn/titconn-app:2024.5.7.1
+        image: images.teknobulut.net/titconn/titconn-app:2024.5.8.1
         imagePullPolicy: Always
-        ports:
-        - containerPort: 80
-          protocol: TCP
         env:
             - name: ASPNETCORE_URLS
-              value: http://+:80
       imagePullSecrets:
-      - name: harbor-registry-secret
+      - name: harborsecret
 ---
 apiVersion: v1
 kind: Service
@@ -370,9 +326,9 @@ spec:
   selector:
     app: titconn-app
   ports:
-    - port: 80
+    - port: 8080
       protocol: TCP
-      targetPort: 80
+      targetPort: 8080
   type: ClusterIP
 ---
 kind: Ingress
@@ -380,14 +336,10 @@ apiVersion: networking.k8s.io/v1
 metadata:
   name: titconn-app-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   ingressClassName: nginx
-  tls:
-    - hosts:
-        - titconn-app.teknobulut.net
-      secretName: titconn-app-ingress
   rules:
     - host: titconn-app.teknobulut.net
       http:
@@ -395,8 +347,7 @@ spec:
           - path: /
             pathType: Prefix
             backend:
-              service:
-                name: titconn-app-service
-                port:
-                  number: 80
-
+               service:
+                 name: titconn-app-service
+                 port: 
+                   number: 8080
