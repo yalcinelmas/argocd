@@ -46,7 +46,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: titconn-keyvault.teknobulut.net
+    - host: desa-keyvault.teknobulut.net
       http:
         paths:
           - path: /
@@ -105,7 +105,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: titconn-hub.teknobulut.net
+    - host: desa-hub.teknobulut.net
       http:
         paths:
           - path: /
@@ -164,7 +164,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: titconn-api.teknobulut.net
+    - host: desa-api.teknobulut.net
       http:
         paths:
           - path: /
@@ -223,7 +223,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: titconn-microservice.teknobulut.net
+    - host: desa-microservice.teknobulut.net
       http:
         paths:
           - path: /
@@ -282,7 +282,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: titconn-scheduler.teknobulut.net
+    - host: desa-scheduler.teknobulut.net
       http:
         paths:
           - path: /
@@ -341,7 +341,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: titconn-app.teknobulut.net
+    - host: desa-app.teknobulut.net
       http:
         paths:
           - path: /
