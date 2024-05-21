@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: titconn-keyvault-container
-        image: images.teknobulut.net/titconnsisecam/titconn-keyvault:2024.5.21.3
+        image: images.teknobulut.net/titconnkeyvault/titconn-keyvault:2024.5.21.4
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
@@ -46,7 +46,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: titconn-sisecam-keyvault.teknobulut.net
+    - host: keyvault.teknobulut.net
       http:
         paths:
           - path: /
