@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: titconn-keyvault-container
-        image: images.teknobulut.net/titconnkeyvault/titconn-keyvault:2025.1.15.1
+        image: images.teknobulut.net/titconnkeyvault/titconn-keyvault:2025.1.15.2
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
@@ -46,7 +46,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: keyvault.teknobulut.net
+    - host: keyvault.brmagazacilik.com.tr
       http:
         paths:
           - path: /
