@@ -18,7 +18,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: "local-storage"
   hostPath:
-    path: /home/ubuntu/project/titconn
+    - path: /home/ubuntu/project/titconn
     
 ---
 apiVersion: v1
