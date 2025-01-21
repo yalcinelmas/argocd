@@ -113,7 +113,7 @@ spec:
         imagePullPolicy: Always
         volumeMounts:
             - name: titconn-data
-            mountPath: /var/titconn
+              mountPath: /var/titconn
         env:
             - name: ASPNETCORE_URLS
       imagePullSecrets:
