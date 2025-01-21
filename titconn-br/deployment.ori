@@ -52,8 +52,15 @@ spec:
       - name: titconn-hub-container
         image: images.teknobulut.net/titconnbr/titconn-hub:{version}
         imagePullPolicy: Always
+        volumeMounts:
+            - name: titconn-data
+              mountPath: /var/titconn
         env:
             - name: ASPNETCORE_URLS
+      volumes:
+          - name: titconn-data
+            persistentVolumeClaim:
+               claimName: titconn-pvc
       imagePullSecrets:
       - name: harborsecret
 ---
