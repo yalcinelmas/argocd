@@ -18,7 +18,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: "local-storage"
   hostPath:
-     path: /home/ubuntu/project/titconn
+    path: /home/ubuntu/project/titconn
     
 ---
 apiVersion: v1
@@ -50,10 +50,17 @@ spec:
     spec:
       containers:
       - name: titconn-hub-container
-        image: images.teknobulut.net/titconnbr/titconn-hub:2025.1.21.7
+        image: images.teknobulut.net/titconnbr/titconn-hub:2025.1.21.8
         imagePullPolicy: Always
+        volumeMounts:
+            - name: titconn-data
+              mountPath: /var/titconn
         env:
             - name: ASPNETCORE_URLS
+      volumes:
+          - name: titconn-data
+            persistentVolumeClaim:
+               claimName: titconn-pvc
       imagePullSecrets:
       - name: harborsecret
 ---
@@ -109,7 +116,7 @@ spec:
     spec:
       containers:
       - name: titconn-api-container
-        image: images.teknobulut.net/titconnbr/titconn-api:2025.1.21.7
+        image: images.teknobulut.net/titconnbr/titconn-api:2025.1.21.8
         imagePullPolicy: Always
         volumeMounts:
             - name: titconn-data
@@ -176,7 +183,7 @@ spec:
     spec:
       containers:
       - name: titconn-app-container
-        image: images.teknobulut.net/titconnbr/titconn-app:2025.1.21.7
+        image: images.teknobulut.net/titconnbr/titconn-app:2025.1.21.8
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
