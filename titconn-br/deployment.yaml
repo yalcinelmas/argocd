@@ -17,7 +17,7 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: "local-storage"
-  - hostPath:
+  hostPath:
      path: /home/ubuntu/project/titconn
     
 ---
