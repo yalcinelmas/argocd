@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: titconn-app-container
-        image: images.teknobulut.net/titconndhlgateway/titconn-app:2025.1.24.1
+        image: harbor-core.harbor.svc.cluster.local/titconndhlgateway/titconn-app:2025.1.24.1
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
