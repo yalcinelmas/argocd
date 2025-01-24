@@ -191,7 +191,7 @@ spec:
     spec:
       containers:
       - name: titconn-scheduler-container
-        image: 3.255.0.102/titconn/titconn-scheduler:{version}
+        image: 3.255.0.80:3002/titconn/titconn-scheduler:{version}
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
