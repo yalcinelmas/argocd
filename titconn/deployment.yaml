@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: titconn-hub-container
-        image: 3.255.0.102/titconn/titconn-hub:2025.1.25.1
+        image: 3.255.0.102/titconn/titconn-hub:2025.1.25.2
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
@@ -73,7 +73,7 @@ spec:
     spec:
       containers:
       - name: titconn-api-container
-        image: 3.255.0.102/titconn/titconn-api:2025.1.25.1
+        image: 3.255.0.102/titconn/titconn-api:2025.1.25.2
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
@@ -132,7 +132,7 @@ spec:
     spec:
       containers:
       - name: titconn-microservice-container
-        image: 3.255.0.102/titconn/titconn-microservice:2025.1.25.1
+        image: 3.255.0.102/titconn/titconn-microservice:2025.1.25.2
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
@@ -191,7 +191,7 @@ spec:
     spec:
       containers:
       - name: titconn-scheduler-container
-        image: 3.255.0.102/titconn/titconn-scheduler:2025.1.25.1
+        image: 3.255.0.102/titconn/titconn-scheduler:2025.1.25.2
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
@@ -250,7 +250,7 @@ spec:
     spec:
       containers:
       - name: titconn-app-container
-        image: 3.255.0.102/titconn/titconn-app:2025.1.25.1
+        image: 3.255.0.102/titconn/titconn-app:2025.1.25.2
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
