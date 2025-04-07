@@ -50,7 +50,7 @@ spec:
     spec:
       containers:
       - name: titconn-hub-container
-        image: repo.teknobulut.net/titconnbr/titconn-hub:2025.4.7.1
+        image: images.teknobulut.net/titconnbr/titconn-hub:2025.4.7.1
         imagePullPolicy: Always
         volumeMounts:
             - name: titconn-data
@@ -116,7 +116,7 @@ spec:
     spec:
       containers:
       - name: titconn-api-container
-        image: repo.teknobulut.net/titconnbr/titconn-api:2025.4.7.1
+        image: images.teknobulut.net/titconnbr/titconn-api:2025.4.7.1
         imagePullPolicy: Always
         volumeMounts:
             - name: titconn-data
@@ -183,7 +183,7 @@ spec:
     spec:
       containers:
       - name: titconn-app-container
-        image: repo.teknobulut.net/titconnbr/titconn-app:2025.4.7.1
+        image: images.teknobulut.net/titconnbr/titconn-app:2025.4.7.1
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
