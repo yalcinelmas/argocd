@@ -9,7 +9,6 @@ spec:
     requests:
       storage: 20Gi
   storageClassName: nas-storage
- 
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -200,5 +199,167 @@ spec:
             backend:
                service:
                  name: titconn-app-service
+                 port: 
+                   number: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: titconn-api-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: titconn-api
+  template:
+    metadata:
+      labels:
+        app: titconn-api
+    spec:
+      containers:
+      - name: titconn-api-container
+        image: images.teknobulut.net/titconnbr/titconn-api:{version}
+        imagePullPolicy: Always
+        volumeMounts:
+            - name: titconn-data
+              mountPath: /var/titconn
+        env:
+            - name: ASPNETCORE_URLS
+      imagePullSecrets:
+      - name: harborsecret
+      volumes:
+          - name: titconn-data
+            persistentVolumeClaim:
+               claimName: titconn-pvc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: titconn-microservice-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: titconn-microservice
+  template:
+    metadata:
+      labels:
+        app: titconn-microservice
+    spec:
+      containers:
+      - name: titconn-microservice-container
+        image: images.teknobulut.net/titconnbr/titconn-microservice:{version}
+        imagePullPolicy: Always
+        volumeMounts:
+            - name: titconn-data
+              mountPath: /var/titconn
+        env:
+            - name: ASPNETCORE_URLS
+      imagePullSecrets:
+      - name: harborsecret
+      volumes:
+          - name: titconn-data
+            persistentVolumeClaim:
+               claimName: titconn-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: titconn-microservice-service
+  labels:
+   app: titconn-microservice-service
+spec:
+  selector:
+    app: titconn-microservice
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+  type: ClusterIP
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: titconn-microservice-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: wms-microservice.brmagazacilik.com.tr
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+               service:
+                 name: titconn-microservice-service
+                 port: 
+                   number: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: titconn-scheduler-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: titconn-scheduler
+  template:
+    metadata:
+      labels:
+        app: titconn-scheduler
+    spec:
+      containers:
+      - name: titconn-scheduler-container
+        image: images.teknobulut.net/titconnbr/titconn-scheduler:{version}
+        imagePullPolicy: Always
+        volumeMounts:
+            - name: titconn-data
+              mountPath: /var/titconn
+        env:
+            - name: ASPNETCORE_URLS
+      imagePullSecrets:
+      - name: harborsecret
+      volumes:
+          - name: titconn-data
+            persistentVolumeClaim:
+               claimName: titconn-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: titconn-scheduler-service
+  labels:
+   app: titconn-scheduler-service
+spec:
+  selector:
+    app: titconn-scheduler
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+  type: ClusterIP
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: titconn-scheduler-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: wms-scheduler.brmagazacilik.com.tr
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+               service:
+                 name: titconn-scheduler-service
                  port: 
                    number: 8080
