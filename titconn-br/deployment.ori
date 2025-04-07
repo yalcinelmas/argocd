@@ -1,26 +1,3 @@
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: local-storage
-provisioner: kubernetes.io/no-provisioner
-volumeBindingMode: WaitForFirstConsumer
-
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: titconn-pv
-spec:
-  capacity:
-    storage: 100Gi
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: "local-storage"
-  hostPath:
-    path: /home/ubuntu/project/titconn
-    
----
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -30,9 +7,9 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
-  storageClassName: "local-storage"
-  
+      storage: 20Gi
+  storageClassName: nas-storage
+ 
 ---
 apiVersion: apps/v1
 kind: Deployment
