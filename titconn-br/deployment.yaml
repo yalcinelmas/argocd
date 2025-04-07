@@ -1,26 +1,3 @@
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: local-storage
-provisioner: kubernetes.io/no-provisioner
-volumeBindingMode: WaitForFirstConsumer
-
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: titconn-pv
-spec:
-  capacity:
-    storage: 100Gi
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: "local-storage"
-  hostPath:
-    path: /home/ubuntu/project/titconn
-    
----
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -30,9 +7,9 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
-  storageClassName: "local-storage"
-  
+      storage: 20Gi
+  storageClassName: nas-storage
+ 
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -50,7 +27,7 @@ spec:
     spec:
       containers:
       - name: titconn-hub-container
-        image: images.teknobulut.net/titconnbr/titconn-hub:2025.4.7.1
+        image: images.teknobulut.net/titconnbr/titconn-hub:2025.4.7.2
         imagePullPolicy: Always
         volumeMounts:
             - name: titconn-data
@@ -116,7 +93,7 @@ spec:
     spec:
       containers:
       - name: titconn-api-container
-        image: images.teknobulut.net/titconnbr/titconn-api:2025.4.7.1
+        image: images.teknobulut.net/titconnbr/titconn-api:2025.4.7.2
         imagePullPolicy: Always
         volumeMounts:
             - name: titconn-data
@@ -183,7 +160,7 @@ spec:
     spec:
       containers:
       - name: titconn-app-container
-        image: images.teknobulut.net/titconnbr/titconn-app:2025.4.7.1
+        image: images.teknobulut.net/titconnbr/titconn-app:2025.4.7.2
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
