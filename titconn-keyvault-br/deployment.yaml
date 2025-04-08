@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: titconn-keyvault-container
-        image: images.teknobulut.net/titconnbr/titconn-keyvault:2025.4.8.1
+        image: images.teknobulut.net/titconnbr/titconn-keyvault:2025.4.8.2
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
