@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: titconn-hub-container
-        image: images.teknobulut.net/titconnbr/titconn-hub:2025.4.8.1
+        image: images.teknobulut.net/titconnbr/titconn-hub:2025.4.8.3
         imagePullPolicy: Always
         volumeMounts:
             - name: titconn-data
@@ -76,12 +76,13 @@ spec:
                  port: 
                    number: 8080
 ---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: titconn-api-deployment
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: titconn-api
@@ -92,7 +93,7 @@ spec:
     spec:
       containers:
       - name: titconn-api-container
-        image: images.teknobulut.net/titconnbr/titconn-api:2025.4.8.1
+        image: images.teknobulut.net/titconnbr/titconn-api:2025.4.8.3
         imagePullPolicy: Always
         volumeMounts:
             - name: titconn-data
@@ -143,12 +144,13 @@ spec:
                  port: 
                    number: 8080
 ---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: titconn-app-deployment
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: titconn-app
@@ -159,7 +161,7 @@ spec:
     spec:
       containers:
       - name: titconn-app-container
-        image: images.teknobulut.net/titconnbr/titconn-app:2025.4.8.1
+        image: images.teknobulut.net/titconnbr/titconn-app:2025.4.8.3
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
@@ -202,6 +204,7 @@ spec:
                  port: 
                    number: 8080
 ---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -218,7 +221,7 @@ spec:
     spec:
       containers:
       - name: titconn-microservice-container
-        image: images.teknobulut.net/titconnbr/titconn-microservice:2025.4.8.1
+        image: images.teknobulut.net/titconnbr/titconn-microservice:2025.4.8.3
         imagePullPolicy: Always
         volumeMounts:
             - name: titconn-data
@@ -284,7 +287,7 @@ spec:
     spec:
       containers:
       - name: titconn-scheduler-container
-        image: images.teknobulut.net/titconnbr/titconn-scheduler:2025.4.8.1
+        image: images.teknobulut.net/titconnbr/titconn-scheduler:2025.4.8.3
         imagePullPolicy: Always
         volumeMounts:
             - name: titconn-data
