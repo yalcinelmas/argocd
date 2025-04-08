@@ -296,11 +296,9 @@ spec:
             - name: ASPNETCORE_URLS
         resources:
           requests:
-            memory: "2048Mi"
-            cpu: "2000m"
+            memory: "5Gi"
           limits:
-            memory: "1024Mi"
-            cpu: "2000m"
+            memory: "5Gi"
       imagePullSecrets:
       - name: harborsecret
       volumes:
