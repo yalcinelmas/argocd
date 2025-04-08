@@ -76,12 +76,13 @@ spec:
                  port: 
                    number: 8080
 ---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: titconn-api-deployment
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: titconn-api
@@ -143,12 +144,13 @@ spec:
                  port: 
                    number: 8080
 ---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: titconn-app-deployment
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: titconn-app
@@ -202,36 +204,7 @@ spec:
                  port: 
                    number: 8080
 ---
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: titconn-api-deployment
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: titconn-api
-  template:
-    metadata:
-      labels:
-        app: titconn-api
-    spec:
-      containers:
-      - name: titconn-api-container
-        image: images.teknobulut.net/titconnbr/titconn-api:{version}
-        imagePullPolicy: Always
-        volumeMounts:
-            - name: titconn-data
-              mountPath: /var/titconn
-        env:
-            - name: ASPNETCORE_URLS
-      imagePullSecrets:
-      - name: harborsecret
-      volumes:
-          - name: titconn-data
-            persistentVolumeClaim:
-               claimName: titconn-pvc
----
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:

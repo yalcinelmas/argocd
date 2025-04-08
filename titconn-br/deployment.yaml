@@ -205,36 +205,6 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: titconn-api-deployment
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: titconn-api
-  template:
-    metadata:
-      labels:
-        app: titconn-api
-    spec:
-      containers:
-      - name: titconn-api-container
-        image: images.teknobulut.net/titconnbr/titconn-api:2025.4.8.1
-        imagePullPolicy: Always
-        volumeMounts:
-            - name: titconn-data
-              mountPath: /var/titconn
-        env:
-            - name: ASPNETCORE_URLS
-      imagePullSecrets:
-      - name: harborsecret
-      volumes:
-          - name: titconn-data
-            persistentVolumeClaim:
-               claimName: titconn-pvc
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
   name: titconn-microservice-deployment
 spec:
   replicas: 1
