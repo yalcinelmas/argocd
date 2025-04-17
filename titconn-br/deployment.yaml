@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: titconn-hub-container
-        image: images.teknobulut.net/titconnbr/titconn-hub:2025.4.16.1
+        image: images.teknobulut.net/titconnbr/titconn-hub:2025.4.17.1
         imagePullPolicy: Always
         volumeMounts:
             - name: titconn-data
@@ -64,6 +64,7 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
 spec:
   ingressClassName: nginx
   rules:
@@ -95,7 +96,7 @@ spec:
     spec:
       containers:
       - name: titconn-api-container
-        image: images.teknobulut.net/titconnbr/titconn-api:2025.4.16.1
+        image: images.teknobulut.net/titconnbr/titconn-api:2025.4.17.1
         imagePullPolicy: Always
         volumeMounts:
             - name: titconn-data
@@ -134,6 +135,7 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
 spec:
   ingressClassName: nginx
   rules:
@@ -165,7 +167,7 @@ spec:
     spec:
       containers:
       - name: titconn-app-container
-        image: images.teknobulut.net/titconnbr/titconn-app:2025.4.16.1
+        image: images.teknobulut.net/titconnbr/titconn-app:2025.4.17.1
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
@@ -196,6 +198,7 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
 spec:
   ingressClassName: nginx
   rules:
@@ -227,7 +230,7 @@ spec:
     spec:
       containers:
       - name: titconn-microservice-container
-        image: images.teknobulut.net/titconnbr/titconn-microservice:2025.4.16.1
+        image: images.teknobulut.net/titconnbr/titconn-microservice:2025.4.17.1
         imagePullPolicy: Always
         volumeMounts:
             - name: titconn-data
@@ -265,6 +268,7 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
 spec:
   ingressClassName: nginx
   rules:
@@ -295,7 +299,7 @@ spec:
     spec:
       containers:
       - name: titconn-scheduler-container
-        image: images.teknobulut.net/titconnbr/titconn-scheduler:2025.4.16.1
+        image: images.teknobulut.net/titconnbr/titconn-scheduler:2025.4.17.1
         imagePullPolicy: Always
         volumeMounts:
             - name: titconn-data
@@ -338,6 +342,7 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
 spec:
   ingressClassName: nginx
   rules:
