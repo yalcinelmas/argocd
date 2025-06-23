@@ -27,6 +27,8 @@ spec:
             limits:
               memory: "1Gi"
               cpu: "1"
+      imagePullSecrets:
+      - name: harborsecret
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
