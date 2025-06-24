@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: puzzle-api
-          image: images.teknobulut.net/neon-shard-level-designer/neon-shard-level-designer:2025.6.23.2  # Docker imajını güncelle
+          image: images.teknobulut.net/neon-shard-level-designer/neon-shard-level-designer:2025.6.24.1  # Docker imajını güncelle
           ports:
             - containerPort: 8000
           env:
