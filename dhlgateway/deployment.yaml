@@ -64,6 +64,6 @@ spec:
               number: 8080
   tls:
   - hosts:
-    - gateway.dhltr.com
-      secretName: dhl-gateway-secret-tls
+    - gateway.dhltr.com  
+    secretName: dhl-gateway-secret-tls
       

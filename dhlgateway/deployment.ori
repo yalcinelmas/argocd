@@ -65,5 +65,5 @@ spec:
   tls:
   - hosts:
     - gateway.dhltr.com
-      secretName: dhl-gateway-secret-tls
+    secretName: dhl-gateway-secret-tls
       
