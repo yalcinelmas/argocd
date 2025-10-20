@@ -62,8 +62,8 @@ spec:
             name: titconn-app-service
             port: 
               number: 8080
-    tls:
-    - hosts:
-      - gateway.dhltr.com
+  tls:
+  - hosts:
+    - gateway.dhltr.com
       secretName: dhl-gateway-secret-tls
       
