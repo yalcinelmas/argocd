@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: titconn-app-container
-        image: images.teknobulut.net/titconndhlgateway/titconn-app:2025.10.2.1
+        image: images.teknobulut.net/titconndhlgateway/titconn-app:2025.10.20.1
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
@@ -41,18 +41,29 @@ apiVersion: networking.k8s.io/v1
 metadata:
   name: titconn-app-ingress
   annotations:
+    cert-manager.io/issuer: letsencrypt-prod
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    #nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
 spec:
   ingressClassName: nginx
   rules:
-    - host: gateway.dhltr.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-               service:
-                 name: titconn-app-service
-                 port: 
-                   number: 8080
+  - host: gateway.dhltr.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: titconn-app-service
+            port: 
+              number: 8080
+    tls:
+    - hosts:
+      - gateway.dhltr.com
+      secretName: dhl-gateway-secret-tls
+      
