@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: titconn-hub-container
-        image: images.teknobulut.net/titconnbr/titconn-hub:2025.12.5.2
+        image: images.teknobulut.net/titconnbr/titconn-hub:2025.12.5.3
         imagePullPolicy: Always
         volumeMounts:
             - name: titconn-data
@@ -96,7 +96,7 @@ spec:
     spec:
       containers:
       - name: titconn-api-container
-        image: images.teknobulut.net/titconnbr/titconn-api:2025.12.5.2
+        image: images.teknobulut.net/titconnbr/titconn-api:2025.12.5.3
         imagePullPolicy: Always
         volumeMounts:
             - name: titconn-data
@@ -167,7 +167,7 @@ spec:
     spec:
       containers:
       - name: titconn-app-container
-        image: images.teknobulut.net/titconnbr/titconn-app:2025.12.5.2
+        image: images.teknobulut.net/titconnbr/titconn-app:2025.12.5.3
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
@@ -230,7 +230,7 @@ spec:
     spec:
       containers:
       - name: titconn-microservice-container
-        image: images.teknobulut.net/titconnbr/titconn-microservice:2025.12.5.2
+        image: images.teknobulut.net/titconnbr/titconn-microservice:2025.12.5.3
         imagePullPolicy: Always
         volumeMounts:
             - name: titconn-data
@@ -299,7 +299,7 @@ spec:
     spec:
       containers:
       - name: titconn-scheduler-container
-        image: images.teknobulut.net/titconnbr/titconn-scheduler:2025.12.5.2
+        image: images.teknobulut.net/titconnbr/titconn-scheduler:2025.12.5.3
         imagePullPolicy: Always
         volumeMounts:
             - name: titconn-data
