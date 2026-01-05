@@ -42,9 +42,19 @@ metadata:
   name: titconn-hub-ingress
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    cert-manager.io/cluster-issuer: letsencrypt-dns01
+    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: '300'
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '300'
+    nginx.ingress.kubernetes.io/proxy-send-timeout: '300'
+    nginx.ingress.kubernetes.io/ssl-passthrough: 'true'
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - titconn-hub.teknobulut.net
+      secretName: titconn-hub-teknobulut-net-tls
   rules:
     - host: titconn-hub.teknobulut.net
       http:
@@ -101,7 +111,6 @@ metadata:
   name: titconn-api-ingress
   annotations:
     kubernetes.io/ingress.class: nginx
-    #nginx.ingress.kubernetes.io/ssl-redirect: "false"
     cert-manager.io/cluster-issuer: letsencrypt-dns01
     nginx.ingress.kubernetes.io/backend-protocol: HTTPS
     nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
@@ -171,9 +180,19 @@ metadata:
   name: titconn-microservice-ingress
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    cert-manager.io/cluster-issuer: letsencrypt-dns01
+    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: '300'
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '300'
+    nginx.ingress.kubernetes.io/proxy-send-timeout: '300'
+    nginx.ingress.kubernetes.io/ssl-passthrough: 'true'
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - titconn-microservice.teknobulut.net
+      secretName: titconn-microservice-teknobulut-net-tls
   rules:
     - host: titconn-microservice.teknobulut.net
       http:
@@ -230,9 +249,19 @@ metadata:
   name: titconn-scheduler-ingress
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    cert-manager.io/cluster-issuer: letsencrypt-dns01
+    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: '300'
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '300'
+    nginx.ingress.kubernetes.io/proxy-send-timeout: '300'
+    nginx.ingress.kubernetes.io/ssl-passthrough: 'true'
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - titconn-scheduler.teknobulut.net
+      secretName: titconn-scheduler-teknobulut-net-tls
   rules:
     - host: titconn-scheduler.teknobulut.net
       http:
@@ -288,10 +317,19 @@ apiVersion: networking.k8s.io/v1
 metadata:
   name: titconn-grpcservice-ingress
   annotations:
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    cert-manager.io/cluster-issuer: letsencrypt-dns01
+    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: '300'
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '300'
+    nginx.ingress.kubernetes.io/proxy-send-timeout: '300'
+    nginx.ingress.kubernetes.io/ssl-passthrough: 'true'
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - titconn-grpcservice.teknobulut.net
+      secretName: titconn-grpcservice-teknobulut-net-tls
   rules:
     - host: titconn-grpcservice.teknobulut.net
       http:
@@ -347,10 +385,19 @@ apiVersion: networking.k8s.io/v1
 metadata:
   name: titconn-app-ingress
   annotations:
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    cert-manager.io/cluster-issuer: letsencrypt-dns01
+    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: '300'
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '300'
+    nginx.ingress.kubernetes.io/proxy-send-timeout: '300'
+    nginx.ingress.kubernetes.io/ssl-passthrough: 'true'
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - titconn-app.teknobulut.net
+      secretName: titconn-app-teknobulut-net-tls
   rules:
     - host: titconn-app.teknobulut.net
       http:
