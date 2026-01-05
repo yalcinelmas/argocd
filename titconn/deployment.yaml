@@ -13,20 +13,20 @@ spec:
         app: titconn-hub
     spec:
       containers:
-      - name: titconn-hub-container
-        image: images.teknobulut.net/titconn/titconn-hub:2026.1.5.2
-        imagePullPolicy: Always
-        env:
+        - name: titconn-hub-container
+          image: images.teknobulut.net/titconn/titconn-hub:2026.1.5.2
+          imagePullPolicy: Always
+          env:
             - name: ASPNETCORE_URLS
       imagePullSecrets:
-      - name: harborsecret
+        - name: harborsecret
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: titconn-hub-service
   labels:
-   app: titconn-hub-service
+    app: titconn-hub-service
 spec:
   selector:
     app: titconn-hub
@@ -52,10 +52,10 @@ spec:
           - path: /
             pathType: Prefix
             backend:
-               service:
-                 name: titconn-hub-service
-                 port: 
-                   number: 8080
+              service:
+                name: titconn-hub-service
+                port:
+                  number: 8080
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -72,20 +72,20 @@ spec:
         app: titconn-api
     spec:
       containers:
-      - name: titconn-api-container
-        image: images.teknobulut.net/titconn/titconn-api:2026.1.5.2
-        imagePullPolicy: Always
-        env:
+        - name: titconn-api-container
+          image: images.teknobulut.net/titconn/titconn-api:2026.1.5.2
+          imagePullPolicy: Always
+          env:
             - name: ASPNETCORE_URLS
       imagePullSecrets:
-      - name: harborsecret
+        - name: harborsecret
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: titconn-api-service
   labels:
-   app: titconn-api-service
+    app: titconn-api-service
 spec:
   selector:
     app: titconn-api
@@ -101,9 +101,20 @@ metadata:
   name: titconn-api-ingress
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    #nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    cert-manager.io/cluster-issuer: letsencrypt-dns01
+    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: '300'
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '300'
+    nginx.ingress.kubernetes.io/proxy-send-timeout: '300'
+    nginx.ingress.kubernetes.io/ssl-passthrough: 'true'
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - titconn-api.teknobulut.net
+      secretName: titconn-api-teknobulut-net-tls
   rules:
     - host: titconn-api.teknobulut.net
       http:
@@ -111,10 +122,10 @@ spec:
           - path: /
             pathType: Prefix
             backend:
-               service:
-                 name: titconn-api-service
-                 port: 
-                   number: 8080
+              service:
+                name: titconn-api-service
+                port:
+                  number: 8080
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -131,20 +142,20 @@ spec:
         app: titconn-microservice
     spec:
       containers:
-      - name: titconn-microservice-container
-        image: images.teknobulut.net/titconn/titconn-microservice:2026.1.5.2
-        imagePullPolicy: Always
-        env:
+        - name: titconn-microservice-container
+          image: images.teknobulut.net/titconn/titconn-microservice:2026.1.5.2
+          imagePullPolicy: Always
+          env:
             - name: ASPNETCORE_URLS
       imagePullSecrets:
-      - name: harborsecret
+        - name: harborsecret
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: titconn-microservice-service
   labels:
-   app: titconn-microservice-service
+    app: titconn-microservice-service
 spec:
   selector:
     app: titconn-microservice
@@ -170,10 +181,10 @@ spec:
           - path: /
             pathType: Prefix
             backend:
-               service:
-                 name: titconn-microservice-service
-                 port: 
-                   number: 8080
+              service:
+                name: titconn-microservice-service
+                port:
+                  number: 8080
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -190,20 +201,20 @@ spec:
         app: titconn-scheduler
     spec:
       containers:
-      - name: titconn-scheduler-container
-        image: images.teknobulut.net/titconn/titconn-scheduler:2026.1.5.2
-        imagePullPolicy: Always
-        env:
+        - name: titconn-scheduler-container
+          image: images.teknobulut.net/titconn/titconn-scheduler:2026.1.5.2
+          imagePullPolicy: Always
+          env:
             - name: ASPNETCORE_URLS
       imagePullSecrets:
-      - name: harborsecret
+        - name: harborsecret
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: titconn-scheduler-service
   labels:
-   app: titconn-scheduler-service
+    app: titconn-scheduler-service
 spec:
   selector:
     app: titconn-scheduler
@@ -229,10 +240,10 @@ spec:
           - path: /
             pathType: Prefix
             backend:
-               service:
-                 name: titconn-scheduler-service
-                 port: 
-                   number: 8080
+              service:
+                name: titconn-scheduler-service
+                port:
+                  number: 8080
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -249,20 +260,20 @@ spec:
         app: titconn-grpcservice
     spec:
       containers:
-      - name: titconn-grpcservice-container
-        image: images.teknobulut.net/titconn/titconn-grpcservice:2026.1.5.2
-        imagePullPolicy: Always
-        env:
+        - name: titconn-grpcservice-container
+          image: images.teknobulut.net/titconn/titconn-grpcservice:2026.1.5.2
+          imagePullPolicy: Always
+          env:
             - name: ASPNETCORE_URLS
       imagePullSecrets:
-      - name: harborsecret
+        - name: harborsecret
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: titconn-grpcservice-service
   labels:
-   app: titconn-grpcservice-service
+    app: titconn-grpcservice-service
 spec:
   selector:
     app: titconn-grpcservice
@@ -288,10 +299,10 @@ spec:
           - path: /
             pathType: Prefix
             backend:
-               service:
-                 name: titconn-grpcservice-service
-                 port: 
-                   number: 8080
+              service:
+                name: titconn-grpcservice-service
+                port:
+                  number: 8080
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -308,20 +319,20 @@ spec:
         app: titconn-app
     spec:
       containers:
-      - name: titconn-app-container
-        image: images.teknobulut.net/titconn/titconn-app:2026.1.5.2
-        imagePullPolicy: Always
-        env:
+        - name: titconn-app-container
+          image: images.teknobulut.net/titconn/titconn-app:2026.1.5.2
+          imagePullPolicy: Always
+          env:
             - name: ASPNETCORE_URLS
       imagePullSecrets:
-      - name: harborsecret
+        - name: harborsecret
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: titconn-app-service
   labels:
-   app: titconn-app-service
+    app: titconn-app-service
 spec:
   selector:
     app: titconn-app
@@ -347,7 +358,7 @@ spec:
           - path: /
             pathType: Prefix
             backend:
-               service:
-                 name: titconn-app-service
-                 port: 
-                   number: 8080
+              service:
+                name: titconn-app-service
+                port:
+                  number: 8080
