@@ -43,7 +43,6 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-dns01
-    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
     nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
     nginx.ingress.kubernetes.io/proxy-connect-timeout: '300'
     nginx.ingress.kubernetes.io/proxy-read-timeout: '300'
@@ -111,7 +110,6 @@ metadata:
   name: titconn-api-ingress
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-dns01
-    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
     nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
     nginx.ingress.kubernetes.io/proxy-connect-timeout: '300'
     nginx.ingress.kubernetes.io/proxy-read-timeout: '300'
@@ -179,7 +177,6 @@ metadata:
   name: titconn-microservice-ingress
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-dns01
-    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
     nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
     nginx.ingress.kubernetes.io/proxy-connect-timeout: '300'
     nginx.ingress.kubernetes.io/proxy-read-timeout: '300'
@@ -247,7 +244,6 @@ metadata:
   name: titconn-scheduler-ingress
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-dns01
-    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
     nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
     nginx.ingress.kubernetes.io/proxy-connect-timeout: '300'
     nginx.ingress.kubernetes.io/proxy-read-timeout: '300'
@@ -315,7 +311,6 @@ metadata:
   name: titconn-grpcservice-ingress
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-dns01
-    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
     nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
     nginx.ingress.kubernetes.io/proxy-connect-timeout: '300'
     nginx.ingress.kubernetes.io/proxy-read-timeout: '300'
@@ -383,7 +378,6 @@ metadata:
   name: titconn-app-ingress
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-dns01
-    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
     nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
     nginx.ingress.kubernetes.io/proxy-connect-timeout: '300'
     nginx.ingress.kubernetes.io/proxy-read-timeout: '300'
