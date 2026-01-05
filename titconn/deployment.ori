@@ -71,7 +71,7 @@ kind: Deployment
 metadata:
   name: titconn-api-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: titconn-api
@@ -346,7 +346,7 @@ kind: Deployment
 metadata:
   name: titconn-app-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: titconn-app
