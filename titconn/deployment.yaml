@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: titconn-hub-container
-        image: images.teknobulut.net/titconn/titconn-hub:2026.1.5.14
+        image: images.teknobulut.net/titconn/titconn-hub:2026.1.5.15
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
@@ -82,17 +82,10 @@ spec:
     spec:
       containers:
       - name: titconn-api-container
-        image: images.teknobulut.net/titconn/titconn-api:2026.1.5.14
+        image: images.teknobulut.net/titconn/titconn-api:2026.1.5.15
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
-        resources:
-          requests:
-            memory: "512Mi"   # Uygulamanın başlaması için gereken minimum RAM
-            cpu: "250m"
-          limits:
-            memory: "2Gi"    # Uygulamanın asla geçmemesi gereken sınır
-            cpu: "1000m"
       imagePullSecrets:
       - name: harborsecret
 ---
@@ -156,7 +149,7 @@ spec:
     spec:
       containers:
       - name: titconn-microservice-container
-        image: images.teknobulut.net/titconn/titconn-microservice:2026.1.5.14
+        image: images.teknobulut.net/titconn/titconn-microservice:2026.1.5.15
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
@@ -223,7 +216,7 @@ spec:
     spec:
       containers:
       - name: titconn-scheduler-container
-        image: images.teknobulut.net/titconn/titconn-scheduler:2026.1.5.14
+        image: images.teknobulut.net/titconn/titconn-scheduler:2026.1.5.15
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
@@ -290,7 +283,7 @@ spec:
     spec:
       containers:
       - name: titconn-grpcservice-container
-        image: images.teknobulut.net/titconn/titconn-grpcservice:2026.1.5.14
+        image: images.teknobulut.net/titconn/titconn-grpcservice:2026.1.5.15
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
@@ -357,7 +350,7 @@ spec:
     spec:
       containers:
       - name: titconn-app-container
-        image: images.teknobulut.net/titconn/titconn-app:2026.1.5.14
+        image: images.teknobulut.net/titconn/titconn-app:2026.1.5.15
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
