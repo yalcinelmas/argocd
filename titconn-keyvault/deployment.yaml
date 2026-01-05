@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: titconn-keyvault-container
-        image: images.teknobulut.net/titconnkeyvault/titconn-keyvault:2026.1.5.4
+        image: images.teknobulut.net/titconnkeyvault/titconn-keyvault:2026.1.5.5
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
@@ -41,10 +41,19 @@ apiVersion: networking.k8s.io/v1
 metadata:
   name: titconn-keyvault-ingress
   annotations:
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    cert-manager.io/cluster-issuer: letsencrypt-dns01
+    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: '300'
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '300'
+    nginx.ingress.kubernetes.io/proxy-send-timeout: '300'
+    nginx.ingress.kubernetes.io/ssl-passthrough: 'true'
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - keyvault.teknobulut.net
+      secretName: keyvault-teknobulut-net-tls
   rules:
     - host: keyvault.teknobulut.net
       http:
