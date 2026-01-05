@@ -86,6 +86,13 @@ spec:
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
+        resources:
+          requests:
+            memory: "1Gi"   # Uygulamanın başlaması için gereken minimum RAM
+            cpu: "1m"
+          limits:
+            memory: "10Gi"    # Uygulamanın asla geçmemesi gereken sınır
+            cpu: "3000m"
       imagePullSecrets:
       - name: harborsecret
 ---
