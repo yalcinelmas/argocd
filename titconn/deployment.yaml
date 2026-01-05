@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: titconn-hub-container
-        image: images.teknobulut.net/titconn/titconn-hub:2025.12.15.1
+        image: images.teknobulut.net/titconn/titconn-hub:2026.1.5.1
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
@@ -73,7 +73,7 @@ spec:
     spec:
       containers:
       - name: titconn-api-container
-        image: images.teknobulut.net/titconn/titconn-api:2025.12.15.1
+        image: images.teknobulut.net/titconn/titconn-api:2026.1.5.1
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
@@ -132,7 +132,7 @@ spec:
     spec:
       containers:
       - name: titconn-microservice-container
-        image: images.teknobulut.net/titconn/titconn-microservice:2025.12.15.1
+        image: images.teknobulut.net/titconn/titconn-microservice:2026.1.5.1
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
@@ -191,7 +191,7 @@ spec:
     spec:
       containers:
       - name: titconn-scheduler-container
-        image: images.teknobulut.net/titconn/titconn-scheduler:2025.12.15.1
+        image: images.teknobulut.net/titconn/titconn-scheduler:2026.1.5.1
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
@@ -237,6 +237,65 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: titconn-grpcservice-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: titconn-grpcservice
+  template:
+    metadata:
+      labels:
+        app: titconn-grpcservice
+    spec:
+      containers:
+      - name: titconn-grpcservice-container
+        image: images.teknobulut.net/titconn/titconn-grpcservice:2026.1.5.1
+        imagePullPolicy: Always
+        env:
+            - name: ASPNETCORE_URLS
+      imagePullSecrets:
+      - name: harborsecret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: titconn-grpcservice-service
+  labels:
+   app: titconn-grpcservice-service
+spec:
+  selector:
+    app: titconn-grpcservice
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 6001
+  type: ClusterIP
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: titconn-grpcservice-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: titconn-grpcservice.teknobulut.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+               service:
+                 name: titconn-grpcservice-service
+                 port: 
+                   number: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
   name: titconn-app-deployment
 spec:
   replicas: 3
@@ -250,7 +309,7 @@ spec:
     spec:
       containers:
       - name: titconn-app-container
-        image: images.teknobulut.net/titconn/titconn-app:2025.12.15.1
+        image: images.teknobulut.net/titconn/titconn-app:2026.1.5.1
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
