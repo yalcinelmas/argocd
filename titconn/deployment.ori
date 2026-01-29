@@ -301,8 +301,10 @@ spec:
     app: titconn-grpcservice
   ports:
     - port: 8080
+      name: grpc
       protocol: TCP
       targetPort: 6001
+      appProtocol: grpc
   type: ClusterIP
 ---
 kind: Ingress
@@ -315,7 +317,6 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-connect-timeout: '300'
     nginx.ingress.kubernetes.io/proxy-read-timeout: '300'
     nginx.ingress.kubernetes.io/proxy-send-timeout: '300'
-    nginx.ingress.kubernetes.io/ssl-passthrough: 'true'
 spec:
   ingressClassName: nginx
   tls:
