@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: titconn-hub-container
-        image: images.teknobulut.net/titconn/titconn-hub:2026.1.13.1
+        image: images.teknobulut.net/titconn/titconn-hub:2026.1.29.1
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
@@ -82,7 +82,7 @@ spec:
     spec:
       containers:
       - name: titconn-api-container
-        image: images.teknobulut.net/titconn/titconn-api:2026.1.13.1
+        image: images.teknobulut.net/titconn/titconn-api:2026.1.29.1
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
@@ -149,7 +149,7 @@ spec:
     spec:
       containers:
       - name: titconn-microservice-container
-        image: images.teknobulut.net/titconn/titconn-microservice:2026.1.13.1
+        image: images.teknobulut.net/titconn/titconn-microservice:2026.1.29.1
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
@@ -216,7 +216,7 @@ spec:
     spec:
       containers:
       - name: titconn-scheduler-container
-        image: images.teknobulut.net/titconn/titconn-scheduler:2026.1.13.1
+        image: images.teknobulut.net/titconn/titconn-scheduler:2026.1.29.1
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
@@ -283,7 +283,7 @@ spec:
     spec:
       containers:
       - name: titconn-grpcservice-container
-        image: images.teknobulut.net/titconn/titconn-grpcservice:2026.1.13.1
+        image: images.teknobulut.net/titconn/titconn-grpcservice:2026.1.29.1
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
@@ -350,7 +350,7 @@ spec:
     spec:
       containers:
       - name: titconn-app-container
-        image: images.teknobulut.net/titconn/titconn-app:2026.1.13.1
+        image: images.teknobulut.net/titconn/titconn-app:2026.1.29.1
         imagePullPolicy: Always
         env:
             - name: ASPNETCORE_URLS
