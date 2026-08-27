@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: titconn-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: titconn-app
+  template:
+    metadata:
+      labels:
+        app: titconn-app
+    spec:
+      containers:
+      - name: titconn-app-container
+        image: images.teknobulut.net/titconn/titconn-app:{version}
+        imagePullPolicy: Always
+        env:
+            - name: ASPNETCORE_URLS
+      imagePullSecrets:
+      - name: harborsecret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: titconn-app-service
+  labels:
+   app: titconn-app-service
+spec:
+  selector:
+    app: titconn-app
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+  type: ClusterIP
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: titconn-app-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-dns01
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: '300'
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '300'
+    nginx.ingress.kubernetes.io/proxy-send-timeout: '300'
+    nginx.ingress.kubernetes.io/ssl-passthrough: 'true'
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - titconn-app.teknobulut.net
+      secretName: titconn-app-teknobulut-net-tls
+  rules:
+    - host: titconn-app.teknobulut.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+               service:
+                 name: titconn-app-service
+                 port: 
+                   number: 8080
