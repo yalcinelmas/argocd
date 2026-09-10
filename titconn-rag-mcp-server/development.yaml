@@ -35,6 +35,8 @@ spec:
             secretKeyRef:
               name: postgres-rag-secret
               key: POSTGRES_URL
+        imagePullSecrets:
+        - name: harborsecret
         resources:
           requests:
             cpu: "100m"
