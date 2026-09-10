@@ -21,6 +21,8 @@ spec:
       labels:
         app: rag-mcp-server
     spec:
+      imagePullSecrets:
+      - name: harborsecret  # <-- Doğru yer: spec seviyesinde olmalı
       containers:
       - name: rag-mcp
         image: images.teknobulut.net/titconn/rag-mcp-server:latest
@@ -29,14 +31,11 @@ spec:
         - containerPort: 8000
           name: http-sse
         env:
-        # Elle olusturdugunuz Secret'i cagirir (Git'e baglantı cümlesi yazilmaz):
         - name: POSTGRES_URL
           valueFrom:
             secretKeyRef:
               name: postgres-rag-secret
               key: POSTGRES_URL
-        imagePullSecrets:
-        - name: harborsecret
         resources:
           requests:
             cpu: "100m"
