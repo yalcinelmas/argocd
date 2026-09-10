@@ -45,16 +45,20 @@ spec:
             memory: "512Mi"
         readinessProbe:
           httpGet:
-            path: /sse
+            path: /health
             port: 8000
           initialDelaySeconds: 5
-          periodSeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
         livenessProbe:
           httpGet:
-            path: /sse
+            path: /health
             port: 8000
           initialDelaySeconds: 15
-          periodSeconds: 20
+          periodSeconds: 10
+          timeoutSeconds: 3
+          failureThreshold: 3
 
 ---
 apiVersion: v1
